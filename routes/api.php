@@ -3,6 +3,7 @@
 use App\Http\Controllers\API\V1\Task\CreateTaskController;
 use App\Http\Controllers\API\V1\Task\FindTaskByIdController;
 use App\Http\Controllers\API\V1\Task\GetAllTaskController;
+use App\Http\Controllers\API\V1\Task\UpdateTaskController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -21,6 +22,9 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     Route::get('/v1/tasks/{task}', [FindTaskByIdController::class, 'show'])
         ->name('api.tasks.show');
+
+    Route::put('/v1/tasks/{task}', [UpdateTaskController::class, 'update'])
+        ->name('api.tasks.update');
 
 });
 
