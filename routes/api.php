@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\V1\Task\CreateTaskController;
+use App\Http\Controllers\API\V1\Task\DeleteTaskController;
 use App\Http\Controllers\API\V1\Task\FindTaskByIdController;
 use App\Http\Controllers\API\V1\Task\GetAllTaskController;
 use App\Http\Controllers\API\V1\Task\UpdateTaskController;
@@ -25,6 +26,9 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     Route::put('/v1/tasks/{task}', [UpdateTaskController::class, 'update'])
         ->name('api.tasks.update');
+
+    Route::delete('/v1/tasks/{task}', [DeleteTaskController::class, 'destroy'])
+        ->name('api.tasks.destroy');
 
 });
 
