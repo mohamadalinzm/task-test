@@ -2,11 +2,11 @@
 
 namespace App\Enums;
 
-enum TaskStatusEnum: string
+enum TaskStatusEnum: int
 {
-    case PENDING = 'pending';
-    case IN_PROGRESS = 'in-progress';
-    case COMPLETED = 'completed';
+    case PENDING = 1;
+    case IN_PROGRESS = 2;
+    case COMPLETED = 3;
 
     public static function values(): array
     {

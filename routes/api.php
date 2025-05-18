@@ -8,5 +8,11 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-Route::post('/v1/tasks', [CreateTaskController::class, 'store'])
-    ->name('api.tasks.store');
+
+Route::group(['middleware' => ['auth:sanctum']], function () {
+
+    Route::post('/v1/tasks', [CreateTaskController::class, 'store'])
+        ->name('api.tasks.create');
+});
+
+
