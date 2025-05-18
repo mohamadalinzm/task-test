@@ -17,7 +17,7 @@ class CreateTaskTest extends TestCase
         app(DatabaseSeeder::class)->run();
     }
 
-    public function test_user_can_create_tax()
+    public function test_user_can_create_task()
     {
         //arrange:
         $request = $this->getRequest();
@@ -25,7 +25,7 @@ class CreateTaskTest extends TestCase
         $response = $this->postJson(route('api.tasks.store'), $request);
         //assert
         $response->assertOk();
-        $this->assertDatabaseHas('task', [
+        $this->assertDatabaseHas('tasks', [
             'title' => $request['title'],
             'description' => $request['description'],
             'status' => $request['status']
