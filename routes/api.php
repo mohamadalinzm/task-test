@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\V1\Task\CreateTaskController;
+use App\Http\Controllers\API\V1\Task\FindTaskByIdController;
 use App\Http\Controllers\API\V1\Task\GetAllTaskController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -17,6 +18,9 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     Route::post('/v1/tasks', [CreateTaskController::class, 'store'])
         ->name('api.tasks.create');
+
+    Route::get('/v1/tasks/{task}', [FindTaskByIdController::class, 'show'])
+        ->name('api.tasks.show');
 
 });
 
