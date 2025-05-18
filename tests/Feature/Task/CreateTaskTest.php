@@ -10,7 +10,6 @@ use Tests\TestCase;
 class CreateTaskTest extends TestCase
 {
     use RefreshDatabase;
-    use WithFaker;
 
     protected string $path = 'api/v1/tasks';
     protected string $method = 'POST';
