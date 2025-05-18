@@ -11,9 +11,6 @@ class CreateTaskTest extends TestCase
 {
     use RefreshDatabase;
 
-    protected string $path = 'api/v1/tasks';
-    protected string $method = 'POST';
-
     public function setUp(): void
     {
         parent::setUp();
@@ -22,20 +19,16 @@ class CreateTaskTest extends TestCase
 
     public function test_user_can_create_tax()
     {
-        $this->prepareAuthUserWithWorkspace();
+        //arrange:
         $request = $this->getRequest();
-
-        $response = $this->makeCall($request);
-
+        //act:
+        $response = $this->postJson(route('api.tasks.store'), $request);
+        //assert
         $response->assertOk();
-        $this->assertDatabaseHas('taxes', [
-            'name' => $request['name'],
-            'code' => $request['code'],
-            'rate' => $request['rate'],
-            'start_date' => $request['start_date'],
-            'end_date' => $request['end_date'],
-            'type_id' => $request['type_id'],
-            'active' => $request['active']
+        $this->assertDatabaseHas('task', [
+            'title' => $request['title'],
+            'description' => $request['description'],
+            'status' => $request['status']
         ]);
     }
 
