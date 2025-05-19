@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\API\V1\Auth\LoginUserController;
+use App\Http\Controllers\API\V1\Auth\LogoutUserController;
+use App\Http\Controllers\API\V1\Auth\RegisterUserController;
 use App\Http\Controllers\API\V1\Task\CreateTaskController;
 use App\Http\Controllers\API\V1\Task\DeleteTaskController;
 use App\Http\Controllers\API\V1\Task\FindTaskByIdController;
@@ -12,8 +15,12 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
+Route::post('/login', [LoginUserController::class, 'login']);
+Route::post('/register', [RegisterUserController::class, 'register']);
+Route::middleware('auth:sanctum')->post('/logout', [LogoutUserController::class, 'logout']);
 
-Route::group(['middleware' => ['auth:sanctum']], function () {
+
+Route::group(['middleware' => ['auth:sanctum','check.permission']], function () {
 
     Route::get('/v1/tasks', [GetAllTaskController::class, 'index'])
         ->name('api.tasks.index');

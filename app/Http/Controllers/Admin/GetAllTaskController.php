@@ -1,23 +1,17 @@
 <?php
 
-namespace App\Http\Controllers\API\V1\Task;
+namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use App\Http\Resources\TaskResource;
+use App\Http\Controllers\BaseController;
 use App\Models\Task;
-use Illuminate\Http\JsonResponse;
+use Illuminate\Contracts\View\View;
 
-class GetAllTaskController extends Controller
+class GetAllTaskController extends BaseController
 {
-    public function index(): JsonResponse
+    public function index(): View
     {
-        $task = Task::query()->get();
+        $tasks = Task::query()->latest()->paginate(25);
 
-        return response()->json([
-            'success' => true,
-            'data' => TaskResource::collection($task),
-            'message' => 'The Task has been successfully retrieved.'
-        ]);
-
+        return view('admin.task.index', compact('tasks'));
     }
 }

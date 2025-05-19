@@ -17,7 +17,7 @@ class RolePermissionSeeder extends Seeder
         $permissions = Permission::query()->pluck('name');
 
         $permissionMapping = [
-            'User' => ['.show','.create'],
+            'User' => ['.show','.store','.create','.index'],
             'Admin' => ['']
         ];
 

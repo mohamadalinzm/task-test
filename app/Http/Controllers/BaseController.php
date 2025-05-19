@@ -1,25 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\API\V1\Task;
+namespace App\Http\Controllers;
 
-use App\Actions\Task\UpdateTaskAction;
-use App\Http\Controllers\Controller;
-use App\Http\Requests\API\V1\Task\UpdateTaskRequest;
-use App\Http\Resources\TaskResource;
-use App\Models\Task;
-use Illuminate\Http\JsonResponse;
+use Illuminate\Routing\Controllers\HasMiddleware;
 
-class UpdateTaskController extends Controller
+class BaseController extends Controller implements HasMiddleware
 {
-    public function update(UpdateTaskRequest $request, Task $task): JsonResponse
+    public static function middleware(): array
     {
-        UpdateTaskAction::new()->run($request,$task);
-
-        return response()->json([
-            'success' => true,
-            'data' => TaskResource::make($task->refresh()),
-            'message' => 'The Task updated successfully.'
-        ]);
-
+        return [
+            'check.permission'
+        ];
     }
 }

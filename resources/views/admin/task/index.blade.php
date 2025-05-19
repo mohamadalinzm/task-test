@@ -1,14 +1,14 @@
-@component('admin.layouts.content' , ['title' => 'لیست محصولات'])
+@component('admin.layouts.content' , ['title' => 'لیست تسک ها'])
     @slot('breadcrumb')
         <li class="breadcrumb-item"><a href="/admin">پنل مدیریت</a></li>
-        <li class="breadcrumb-item active">لیست محصولات</li>
+        <li class="breadcrumb-item active">لیست تسک ها</li>
     @endslot
 
     <div class="row">
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">محصولات</h3>
+                    <h3 class="card-title">تسک ها</h3>
 
                     <div class="card-tools d-flex">
                         <form action="">
@@ -21,7 +21,7 @@
                             </div>
                         </form>
                         <div class="btn-group-sm mr-1">
-                            <a href="{{ route('product.create') }}" class="btn btn-info">ایجاد محصول جدید</a>
+                            <a href="{{ route('web.task.create') }}" class="btn btn-info">ایجاد تسک جدید</a>
                         </div>
                     </div>
                 </div>
@@ -30,45 +30,23 @@
                     <table class="table table-hover">
                         <tbody>
                         <tr>
-                            <th>کد</th>
-                            <th>تصویر</th>
                             <th>نام</th>
-                            <th>قیمت</th>
-                            <th>وضعیت تخفیف</th>
-                            <th>موجودی</th>
+                            <th>وضعیت</th>
                             <th>اقدامات</th>
                         </tr>
 
-                        @foreach($products as $product)
+                        @foreach($tasks as $task)
                             <tr>
-                                <td>{{ $product->code }}</td>
-                                <td><img style="width: 100px;height:100px" src="{{ $product->cover() }}" alt="" onerror="this.src='https://via.placeholder.com/100';"></td>
-                                <td>{{ $product->title }}</td>
-                                <td><span style="@if($product->off!=null) text-decoration: line-through @endif">{{ number_format($product->price) }}</span><br>{{ ($product->off !=null)?number_format($product->off):"" }}</td>
-                                <td>@if ($product->off==null)
-                                    ندارد
-                                @else
-                                  @if ($product->offPercent>0)
-                                      {{ $product->offPercent }} درصد
-                                  @else
-                                  {{ number_format($product->offPrice) }} تومان
-
-                                  @endif
-                                @endif </td>
-                                <td>@if ($product->inventory==0)
-                                    ناموجود
-                                @else
-                                {{ $product->inventory }}
-                                @endif</td>
+                                <td>{{ $task->title }}</td>
+                                <td>{{ \App\Enums\TaskStatusEnum::from($task->status)->name() }}</td>
                                 <td class="d-flex">
-                                    <form action="{{ route('product.destroy' , ['product' => $product->id]) }}" method="POST">
+                                    <form action="{{ route('web.task.destroy' , ['task' => $task->id]) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-sm btn-danger ml-1">حذف</button>
                                     </form>
-                                    <a href="{{ route('product.edit' , ['product' => $product->id]) }}" class="btn btn-sm btn-primary">ویرایش</a>
-                                    <a href="{{ route('product.upload' , ['product' => $product->id]) }}" class="btn btn-sm btn-warning mx-1">گالری</a>
-                                    <a href="{{ route('product.quantity' , ['product' => $product->id]) }}" class="btn btn-sm btn-default mx-1">موجودی</a>
+                                    <a href="{{ route('web.task.edit' , ['task' => $task->id]) }}" class="btn btn-sm btn-primary">ویرایش</a>
+                                    <a href="{{ route('web.task.show' , ['task' => $task->id]) }}" class="btn btn-sm btn-secondary mx-1">نمایش</a>
                                 </td>
                             </tr>
                         @endforeach
@@ -79,7 +57,7 @@
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
-                    {{ $products->links() }}
+                    {{ $tasks->links() }}
                 </div>
             </div>
             <!-- /.card -->

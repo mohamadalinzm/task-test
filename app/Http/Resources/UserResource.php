@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class TaskResource extends JsonResource
+class UserResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,9 +16,16 @@ class TaskResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'title' => $this->title,
-            'description' => $this->description,
-            'status' => $this->status,
+            'name' => $this->title,
+            'email' => $this->description,
+            'roles' => $this->whenLoaded('roles', function () {
+                return $this->roles->map(function ($role) {
+                    return [
+                        'id' => $role->id,
+                        'name' => $role->name,
+                    ];
+                });
+            }),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at
         ];

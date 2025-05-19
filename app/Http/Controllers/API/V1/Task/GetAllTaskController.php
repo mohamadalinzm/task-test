@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\API\V1\Task;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\BaseController;
 use App\Http\Resources\TaskResource;
 use App\Models\Task;
 use Illuminate\Http\JsonResponse;
 
-class GetAllTaskController extends Controller
+class GetAllTaskController extends BaseController
 {
     public function index(): JsonResponse
     {

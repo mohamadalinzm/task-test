@@ -2,28 +2,28 @@
 
 namespace App\Console\Commands;
 
-use App\Enums\VerifyLevelEnum;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
-use RolePermission\Enums\BaseRoleEnum;
+use Illuminate\Support\Facades\Hash;
 use Throwable;
 
-class MakeSuperAdmin extends Command
+class MakeAdmin extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'make:super-admin {firstname : Firstname} {lastname : Lastname} {mobile : Mobile}';
+    protected $signature = 'make:admin {name : Name} {email : Email} {password : Password}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Make Super Admin';
+    protected $description = 'Make Admin';
 
     /**
      * Execute the console command.
@@ -31,37 +31,35 @@ class MakeSuperAdmin extends Command
     public function handle(): true
     {
 
-        $firstname= $this->argument('firstname');
-        $lastname = $this->argument('lastname');
-        $mobile = $this->argument('mobile');
+        $name= $this->argument('name');
+        $email = $this->argument('email');
+        $password = $this->argument('password');
 
-        $this->makeSuperAdmin($firstname, $lastname,$mobile);
+        $this->makeAdmin($name, $email,$password);
 
         return true;
     }
 
-    private function makeSuperAdmin($firstname,$lastname,$mobile)
+    private function makeAdmin($name,$email,$password): void
     {
         try {
             DB::beginTransaction();
 
             $user = User::query()
-                ->where('mobile', $mobile)
+                ->where('email', $email)
                 ->first();
 
             if (!$user) {
                 $user = new User();
             }
 
-            $user->firstname = $firstname;
-            $user->lastname = $lastname;
-            $user->mobile = $mobile;
-            $user->active = true;
-            $user->verify_level = VerifyLevelEnum::ACCEPTED->value;
+            $user->name = $name;
+            $user->email = $email;
+            $user->password = Hash::make($password);
             $user->save();
 
-            $user->assignRole(BaseRoleEnum::SUPER_ADMIN->value);
-            $user->removeRole(BaseRoleEnum::CLIENT->value);
+            $role = Role::query()->where('name', 'Admin')->first();
+            $user->roles()->attach($role);
 
             DB::commit();
         } catch (Throwable $e) {
@@ -69,9 +67,7 @@ class MakeSuperAdmin extends Command
             dd($e);
         }
 
-        $this->info(PHP_EOL . ".:: Super Admin Created successfully ::." . PHP_EOL);
-
-        return true;
+        $this->info(PHP_EOL . ".:: Admin Created successfully ::." . PHP_EOL);
 
     }
 }

@@ -1,23 +1,17 @@
 <?php
 
-namespace App\Http\Controllers\API\V1\Task;
+namespace App\Http\Controllers\Admin;
 
-use App\Actions\Task\UpdateTaskAction;
-use App\Http\Controllers\Controller;
-use App\Http\Requests\API\V1\Task\UpdateTaskRequest;
-use App\Http\Resources\TaskResource;
+use App\Http\Controllers\BaseController;
 use App\Models\Task;
-use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 
-class DeleteTaskController extends Controller
+class DeleteTaskController extends BaseController
 {
-    public function destroy(Task $task): JsonResponse
+    public function destroy(Task $task): RedirectResponse
     {
         $task->delete();
 
-        return response()->json([
-            'success' => true,
-            'message' => 'The Task was deleted.'
-        ]);
+        return redirect(route('web.task.index'));
     }
 }

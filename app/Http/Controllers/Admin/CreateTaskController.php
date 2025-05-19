@@ -1,24 +1,33 @@
 <?php
 
-namespace App\Http\Controllers\API\V1\Task;
+namespace App\Http\Controllers\Admin;
 
-use App\Actions\Task\CreateTaskAction;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\BaseController;
 use App\Http\Requests\API\V1\Task\CreateTaskRequest;
-use App\Http\Resources\TaskResource;
-use Illuminate\Http\JsonResponse;
+use App\Models\Task;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 
-class CreateTaskController extends Controller
+class CreateTaskController extends BaseController
 {
-    public function store(CreateTaskRequest $request): JsonResponse
-    {
-        $task = CreateTaskAction::new()->run($request);
 
-        return response()->json([
-            'success' => true,
-            'data' => TaskResource::make($task),
-            'message' => 'The Task has been successfully created.'
+
+    public function create(): View
+    {
+        $task = new Task();
+
+        return view('admin.task.create', compact('task'));
+    }
+
+    public function store(CreateTaskRequest $request): RedirectResponse
+    {
+        Task::query()->create([
+            'title' => $request->title,
+            'description' => $request->description,
+            'status' => $request->status,
+
         ]);
 
+        return redirect(route('web.task.index'));
     }
 }

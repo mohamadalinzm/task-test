@@ -1,62 +1,12 @@
-@component('admin.layouts.content' , ['title' => 'ایجاد محصول جدید'])
+@component('admin.layouts.content' , ['title' => 'ایجاد تسک جدید'])
     @slot('breadcrumb')
         <li class="breadcrumb-item"><a href="/admin">پنل مدیریت</a></li>
-        <li class="breadcrumb-item active">محصولات</li>
+        <li class="breadcrumb-item active">تسک ها</li>
     @endslot
 
     @slot('script')
         <script>
-            $('#categories').select2({
-                'placeholder' : 'دسته بندی مورد نظر را انتخاب کنید'
-            })
 
-            $('#tags').select2({
-                'placeholder' : 'تگ مورد نظر را انتخاب کنید'
-            })
-
-
-            $('#sizes').select2({
-                'placeholder' : 'سایز مورد نظر را انتخاب کنید'
-            })
-
-            $('#quantity').select2({
-                'placeholder' : 'سایز مورد نظر را انتخاب کنید'
-            })
-
-            $("#sizes").on("select2:select", function (e) {
-                console.log(e.params.data);
-                let id = e.params.data.id;
-                if(id != 0)
-                {
-                    let size = e.params.data.text;
-                    let bodyData = '<div id="size-'+size+'" class="row">' +
-                        '<div class="form-group col-lg-4">' +
-                        '<label for="size">سایز</label>' +
-                        '<input type="text" name="size[]" value="'+size+'" class="form-control" >' +
-                        '</div>' +
-                        '<div class="form-group col-lg-4">' +
-                        '<label for="quantity">موجودی</label>' +
-                        '<input type="text" name="quantity[]" value="1" class="form-control">' +
-                        '</div>' +
-                        '<div class="col-lg-4">' +
-                        '<button type="button" style="margin-top: 35px;" class="btn btn-sm btn-danger delete-size size-'+size+'">حذف</button>' +
-                        '</div>' +
-                        '</div>' ;
-                    $("#size-quantity").append(bodyData);
-                }
-
-            });
-
-            $("#types option.select-type").click(function (e) {
-                let type = e;
-                console.log('success');
-                // $(".type-off").append(bodyData);
-            });
-
-            $('#size-quantity').on('click','button.delete-size',function(e){
-                e.preventDefault();
-                $(this).closest("div.row").remove();
-            });
 
         </script>
             <link rel="stylesheet" type="text/css" id="u0" href="/tiny/skin.min.css">
@@ -84,8 +34,8 @@
         <div class="col-12">
             <main>
                 <section>
-                    <form action="{{ route('product.store') }}" method="POST" enctype="multipart/form-data">
-                        @include('admin.product.form')
+                    <form action="{{ route('web.task.store') }}" method="POST" enctype="multipart/form-data">
+                        @include('admin.task.form')
 
                         <button type="submit" class="btn btn-primary my-2">ذخیره</button>
                     </form>

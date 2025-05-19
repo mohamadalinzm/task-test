@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\API\V1\Task;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\BaseController;
 use App\Http\Resources\TaskResource;
 use App\Models\Task;
 use Illuminate\Http\JsonResponse;
 
-class FindTaskByIdController extends Controller
+class FindTaskByIdController extends BaseController
 {
     public function show(Task $task): JsonResponse
     {

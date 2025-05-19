@@ -2,22 +2,26 @@
 
 namespace App\Http\Controllers\API\V1\Auth;
 
-use App\Actions\Task\CreateTaskAction;
+use App\Actions\Auth\RegisterUserAction;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\API\V1\Task\CreateTaskRequest;
-use App\Http\Resources\TaskResource;
+use App\Http\Requests\API\V1\Auth\RegisterUserRequest;
+use App\Http\Resources\UserResource;
 use Illuminate\Http\JsonResponse;
 
-class LoginUserController extends Controller
+class RegisterUserController extends Controller
 {
-    public function store(CreateTaskRequest $request): JsonResponse
+    public function register(RegisterUserRequest $request): JsonResponse
     {
-        $task = CreateTaskAction::new()->run($request);
+        $user = RegisterUserAction::new()->run($request);
 
         return response()->json([
             'success' => true,
-            'data' => TaskResource::make($task),
-            'message' => 'The Task has been successfully created.'
+            'data' => UserResource::make($user),
+            'token' => $user->createToken(
+                'API token for ' . $user->email,
+                ['*'],
+                now()->addMonth())->plainTextToken,
+            'message' => 'Authenticated.'
         ]);
 
     }

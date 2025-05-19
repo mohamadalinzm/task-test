@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Requests\API\V1\Task;
+namespace App\Http\Requests\API\V1\Auth;
 
 use App\Enums\TaskStatusEnum;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class CreateTaskRequest extends FormRequest
+class LoginUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,9 +24,8 @@ class CreateTaskRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "title" => ['required', 'string'],
-            "description" => ['nullable', 'string'],
-            "status" => ['required', Rule::in(TaskStatusEnum::values()) ]
+            'email' => ['required', 'string', 'email'],
+            'password' => ['required', 'string','min:8'],
         ];
     }
 }

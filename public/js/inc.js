@@ -654,7 +654,7 @@ $('.quantity').each(function () {
                     //     count = parseInt(maxInput);
                     // }
                     // let product_id = dataResult.product_id;
-                    {{ sweetAlert("محصول مورد نظر به حداکثر تعداد موجود رسیده است")
+                    {{ sweetAlert("تسک مورد نظر به حداکثر تعداد موجود رسیده است")
                     }}
                     console.log('not available');
                     console.log(count);

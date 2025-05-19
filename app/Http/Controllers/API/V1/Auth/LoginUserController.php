@@ -1,23 +1,38 @@
 <?php
 
-namespace App\Http\Controllers\API\V1\Task;
+namespace App\Http\Controllers\API\V1\Auth;
 
-use App\Actions\Task\CreateTaskAction;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\API\V1\Task\CreateTaskRequest;
-use App\Http\Resources\TaskResource;
+use App\Http\Requests\API\V1\Auth\LoginUserRequest;
+use App\Http\Resources\UserResource;
+use App\Models\User;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Auth;
 
-class CreateTaskController extends Controller
+class LoginUserController extends Controller
 {
-    public function store(CreateTaskRequest $request): JsonResponse
+    public function login(LoginUserRequest $request): JsonResponse
     {
-        $task = CreateTaskAction::new()->run($request);
+        $request->validated($request->all());
+
+        if (!Auth::attempt($request->only('email', 'password'))) {
+            return response()->json([
+                'success' => false,
+                'data' => '',
+                'message' => 'Invalid credentials'
+            ],401);
+        }
+
+        $user = User::query()->firstWhere('email', $request->validated('email'));
 
         return response()->json([
             'success' => true,
-            'data' => TaskResource::make($task),
-            'message' => 'The Task has been successfully created.'
+            'data' => UserResource::make($user),
+            'token' => $user->createToken(
+                'API token for ' . $user->email,
+                ['*'],
+                now()->addMonth())->plainTextToken,
+            'message' => 'User authenticated successfully'
         ]);
 
     }

@@ -1,25 +1,29 @@
 <?php
 
-namespace App\Http\Controllers\API\V1\Task;
+namespace App\Http\Controllers\Admin;
 
-use App\Actions\Task\UpdateTaskAction;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\BaseController;
 use App\Http\Requests\API\V1\Task\UpdateTaskRequest;
-use App\Http\Resources\TaskResource;
 use App\Models\Task;
-use Illuminate\Http\JsonResponse;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 
-class UpdateTaskController extends Controller
+class UpdateTaskController extends BaseController
 {
-    public function update(UpdateTaskRequest $request, Task $task): JsonResponse
+    public function edit(Task $task): View
     {
-        UpdateTaskAction::new()->run($request,$task);
+        return view('admin.task.edit', compact('task'));
+    }
 
-        return response()->json([
-            'success' => true,
-            'data' => TaskResource::make($task->refresh()),
-            'message' => 'The Task updated successfully.'
+    public function update(Task $task, UpdateTaskRequest $request): RedirectResponse
+    {
+
+        $task->update([
+            'title' => $request->title,
+            'description' => $request->description,
+            'status' => $request->status
         ]);
 
+        return redirect(route('web.task.index'));
     }
 }

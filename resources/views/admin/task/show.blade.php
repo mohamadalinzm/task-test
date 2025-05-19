@@ -1,14 +1,14 @@
-@component('admin.layouts.content' , ['title' => 'جزییات محصول' ])
+@component('admin.layouts.content' , ['title' => 'جزییات تسک' ])
     @slot('breadcrumb')
         <li class="breadcrumb-item"><a href="/admin">پنل مدیریت</a></li>
-        <li class="breadcrumb-item active">محصول</li>
+        <li class="breadcrumb-item active">تسک</li>
     @endslot
     <div class="row">
         <div class="col-12">
-            <h1>جزییات {{ $product->name }}</h1>
-            <p><a href="{{ route('product.edit', ['product' => $product]) }}">ویرایش</a></p>
+            <h1>جزییات {{ $task->name }}</h1>
+            <p><a href="{{ route('web.task.edit', ['task' => $task]) }}">ویرایش</a></p>
 
-{{--            <form action="{{ route('product.destroy', ['product' => $product]) }}" method="POST">--}}
+{{--            <form action="{{ route('web.task.destroy', ['task' => $task]) }}" method="POST">--}}
 {{--                @method('DELETE')--}}
 {{--                @csrf--}}
 
@@ -19,86 +19,22 @@
 
     <div class="row">
         <div class="col-12">
-            <p><strong>نام</strong> {{ $product->title }}</p>
+            <p><strong>نام</strong> {{ $task->title }}</p>
         </div>
     </div>
 
     <div class="row">
         <div class="col-12">
-            <p><strong>قیمت</strong> {{ number_format($product->price) }}</p>
+            <p><strong>توضیحات</strong> {{ strip_tags($task->description) }}</p>
         </div>
     </div>
 
     <div class="row">
         <div class="col-12">
-            <p><strong>قیمت با تخفیف</strong> {{ number_format($product->off) }}</p>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-12">
-            <p><strong>میزان تخفیف</strong> {{ number_format($product->offPrice) }}</p>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-12">
-            <p><strong>درصد تخفیف</strong> {{ $product->offPercent }}</p>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-12">
-            <p><strong>میزان کارمزد</strong> {{ $product->feePrice }}</p>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-12">
-            <p><strong>درصد کارمزد</strong> {{ $product->feePercent }}</p>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-12">
-            <p><strong>وزن</strong> {{ $product->weight }}</p>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-12">
-            <p><strong>رنگ</strong> {{ $product->color }}</p>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-12">
-            <p><strong>نوع</strong> {{ $product->type }}</p>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-12">
-            <p><strong>عیار</strong> {{ $product->cutting }}</p>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-12">
-            <p><strong>میزان فروش</strong> {{ $product->saleCount }}</p>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-12">
-            <p><strong>موجودی</strong> {{ $product->inventory }}</p>
+            <p><strong>وضعیت</strong> {{ \App\Enums\TaskStatusEnum::from($task->status)->name() }}</p>
         </div>
     </div>
 
 
-    <div class="row">
-        <div class="col-12">
-            <img src="/image/{{ $product->cover() }}" alt="" class="img-thumbnail">
-        </div>
-    </div>
+
 @endcomponent

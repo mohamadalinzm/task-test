@@ -1,20 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\API\V1\Task;
+namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use App\Http\Resources\TaskResource;
+use App\Http\Controllers\BaseController;
 use App\Models\Task;
-use Illuminate\Http\JsonResponse;
+use Illuminate\Contracts\View\View;
 
-class FindTaskByIdController extends Controller
+class FindTaskByIdController extends BaseController
 {
-    public function show(Task $task): JsonResponse
+    public function show(Task $task): View
     {
-        return response()->json([
-            'success' => true,
-            'data' => TaskResource::make($task),
-            'message' => 'The Task has been successfully retrieved.'
-        ]);
+        return view('admin.task.show', compact('task'));
     }
 }
