@@ -7,7 +7,7 @@ use App\Http\Requests\API\V1\Auth\LoginUserRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class LoginUserController extends Controller
 {
@@ -15,15 +15,15 @@ class LoginUserController extends Controller
     {
         $request->validated($request->all());
 
-        if (!Auth::attempt($request->only('email', 'password'))) {
+        $user = User::query()->where('email', $request->validated('email'))->first();
+
+        if (!$user || !Hash::check($request->validated('password'), $user->password)) {
             return response()->json([
                 'success' => false,
                 'data' => '',
                 'message' => 'Invalid credentials'
-            ],401);
+            ], 401);
         }
-
-        $user = User::query()->firstWhere('email', $request->validated('email'));
 
         return response()->json([
             'success' => true,
@@ -34,6 +34,5 @@ class LoginUserController extends Controller
                 now()->addMonth())->plainTextToken,
             'message' => 'User authenticated successfully'
         ]);
-
     }
 }

@@ -39,15 +39,21 @@
                             <tr>
                                 <td>{{ $task->title }}</td>
                                 <td>{{ \App\Enums\TaskStatusEnum::from($task->status)->name() }}</td>
-                                <td class="d-flex">
-                                    <form action="{{ route('web.task.destroy' , ['task' => $task->id]) }}" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-danger ml-1">حذف</button>
-                                    </form>
-                                    <a href="{{ route('web.task.edit' , ['task' => $task->id]) }}" class="btn btn-sm btn-primary">ویرایش</a>
-                                    <a href="{{ route('web.task.show' , ['task' => $task->id]) }}" class="btn btn-sm btn-secondary mx-1">نمایش</a>
-                                </td>
+                                @if(auth()->user()->hasRole('Admin'))
+                                    <td class="d-flex">
+                                        <form action="{{ route('web.task.destroy' , ['task' => $task->id]) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-sm btn-danger ml-1">حذف</button>
+                                        </form>
+                                        <a href="{{ route('web.task.edit' , ['task' => $task->id]) }}" class="btn btn-sm btn-primary">ویرایش</a>
+                                        <a href="{{ route('web.task.show' , ['task' => $task->id]) }}" class="btn btn-sm btn-secondary mx-1">نمایش</a>
+                                    </td>
+                                @else
+                                    <td class="d-flex">
+                                        <a href="{{ route('web.task.show' , ['task' => $task->id]) }}" class="btn btn-sm btn-secondary mx-1">نمایش</a>
+                                    </td>
+                                @endif
                             </tr>
                         @endforeach
 

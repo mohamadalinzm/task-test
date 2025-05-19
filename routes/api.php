@@ -15,9 +15,9 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-Route::post('/login', [LoginUserController::class, 'login']);
-Route::post('/register', [RegisterUserController::class, 'register']);
-Route::middleware('auth:sanctum')->post('/logout', [LogoutUserController::class, 'logout']);
+Route::post('/v1/login', [LoginUserController::class, 'login']);
+Route::post('/v1/register', [RegisterUserController::class, 'register']);
+Route::middleware('auth:sanctum')->post('/v1/logout', [LogoutUserController::class, 'logout']);
 
 
 Route::group(['middleware' => ['auth:sanctum','check.permission']], function () {

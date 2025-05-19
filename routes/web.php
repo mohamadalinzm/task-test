@@ -33,6 +33,6 @@ Route::group(['middleware' => ['auth','check.permission'], 'prefix' => 'admin/ta
         Route::post('/', [CreateTaskController::class,'store'])->name('web.task.store');
         Route::get('/{task}', [FindTaskByIdController::class,'show'])->name('web.task.show');
         Route::get('/{task}/edit', [UpdateTaskController::class,'edit'])->name('web.task.edit');
-        Route::patch('/{task}', [UpdateTaskController::class,'update'])->name('web.task.update');
+        Route::put('/{task}', [UpdateTaskController::class,'update'])->name('web.task.update');
         Route::delete('/{task}', [DeleteTaskController::class,'destroy'])->name('web.task.destroy');
     });
