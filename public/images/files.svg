@@ -1,0 +1,49 @@
+<svg id="files" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16.141 21.621">
+  <g   fill="CurrentColor" transform="translate(-63.875 0.125)">
+    <g   fill="CurrentColor" transform="translate(64)">
+      <g  transform="translate(0)">
+        <path fill="CurrentColor"  d="M79.888,3.918a.354.354,0,0,0-.1-.252L76.174.1a.359.359,0,0,0-.255-.1V0H65.083A1.076,1.076,0,0,0,64,1.069V20.3a1.076,1.076,0,0,0,1.083,1.069H78.808A1.076,1.076,0,0,0,79.891,20.3V3.918Zm-3.608-2.7,2.379,2.346H76.641a.359.359,0,0,1-.361-.356ZM79.169,20.3a.359.359,0,0,1-.361.356H65.083a.359.359,0,0,1-.361-.356V1.069a.359.359,0,0,1,.361-.356H75.557V3.206a1.076,1.076,0,0,0,1.083,1.069h2.528Z" transform="translate(-64)" stroke-width="0.25"/>
+      </g>
+    </g>
+    <g  fill="CurrentColor" transform="translate(66.534 9.617)">
+      <g  transform="translate(0)">
+        <path fill="CurrentColor"  d="M121.069,216a1.069,1.069,0,1,0,1.069,1.069A1.069,1.069,0,0,0,121.069,216Zm0,1.425a.356.356,0,1,1,.356-.356A.356.356,0,0,1,121.069,217.425Z" transform="translate(-120 -216)"   stroke-width="0.25"/>
+      </g>
+    </g>
+    <g  fill="CurrentColor" transform="translate(69.991 10.411)">
+      <g id="Group_6820" transform="translate(0 0)">
+        <rect  width="7.672" height="0.548"  stroke-width="0.25"/>
+      </g>
+    </g>
+    <g  fill="CurrentColor" transform="translate(66.534 6.055)">
+      <g  transform="translate(0)">
+        <path fill="CurrentColor" d="M121.069,136a1.069,1.069,0,1,0,1.069,1.069A1.069,1.069,0,0,0,121.069,136Zm0,1.425a.356.356,0,1,1,.356-.356A.356.356,0,0,1,121.069,137.425Z" transform="translate(-120 -136)" stroke-width="0.25"/>
+      </g>
+    </g>
+    <g fill="CurrentColor" transform="translate(69.991 7.124)">
+      <g id="Group_6824" >
+        <rect  width="7.672" height="0.548" stroke-width="0.25"/>
+      </g>
+    </g>
+    <g  fill="CurrentColor" transform="translate(66.534 13.179)">
+      <g transform="translate(0)">
+        <path fill="CurrentColor"  d="M121.069,296a1.069,1.069,0,1,0,1.069,1.069A1.069,1.069,0,0,0,121.069,296Zm0,1.425a.356.356,0,1,1,.356-.356A.356.356,0,0,1,121.069,297.425Z" transform="translate(-120 -296)"  stroke-width="0.25"/>
+      </g>
+    </g>
+    <g fill="CurrentColor"  transform="translate(69.991 13.699)">
+      <g transform="translate(0 0)">
+        <rect  width="7.672" height="0.548" stroke-width="0.25"/>
+      </g>
+    </g>
+    <g fill="CurrentColor"  transform="translate(66.534 16.74)">
+      <g  transform="translate(0)">
+        <path fill="CurrentColor" d="M121.069,376a1.069,1.069,0,1,0,1.069,1.069A1.069,1.069,0,0,0,121.069,376Zm0,1.425a.356.356,0,1,1,.356-.356A.356.356,0,0,1,121.069,377.425Z" transform="translate(-120 -376)"  stroke-width="0.25"/>
+      </g>
+    </g>
+    <g fill="CurrentColor" transform="translate(69.991 17.535)">
+      <g  transform="translate(0 0)">
+        <rect  width="7.672" height="0.548" stroke-width="0.25"/>
+      </g>
+    </g>
+  </g>
+</svg>

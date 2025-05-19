@@ -1,0 +1,6 @@
+<svg id="city" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25">
+    <path id="Path_5688" data-name="Path 5688" d="M0,0H25V25H0Z" fill="none"/>
+    <path id="Path_5689" data-name="Path 5689"
+          d="M15.5,11.375V5.125L12.375,2,9.25,5.125V7.208H3V21.792H21.75V11.375ZM7.167,19.708H5.083V17.625H7.167Zm0-4.167H5.083V13.458H7.167Zm0-4.167H5.083V9.292H7.167Zm6.25,8.333H11.333V17.625h2.083Zm0-4.167H11.333V13.458h2.083Zm0-4.167H11.333V9.292h2.083Zm0-4.167H11.333V5.125h2.083Zm6.25,12.5H17.583V17.625h2.083Zm0-4.167H17.583V13.458h2.083Z"
+          transform="translate(0.125 0.083)" fill="CurrentColor"/>
+</svg>
